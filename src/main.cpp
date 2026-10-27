@@ -16,7 +16,7 @@ const char* WIFI_PASS = "12345678";
 const char* MQTT_HOST = "broker.hivemq.com";   // plain TCP port 1883
 const int   MQTT_PORT = 1883;
 const char* BASE      = "altrobyte/device1";   // same base topic as the web tool
-const char* FW_VERSION = "1.0.0";
+const char* FW_VERSION = "2.1.0";
 
 WiFiClient net;
 PubSubClient mqtt(net);
@@ -170,5 +170,7 @@ void setup() {
 void loop() {
   if (!mqtt.connected()) reconnect();
   mqtt.loop();
-  
+  int ldr = analogRead(34);
+  Serial.println("LDR Reading: " + String(ldr));
+  publishStatus("LDR Reading:",ldr);
 }
